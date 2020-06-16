@@ -1,6 +1,5 @@
 <template>
   <div class="matrix-input">
-
     <div class="row" v-show="!result">
       <div class="col-md-12">
         <h3>Enter Matrix data</h3>
@@ -75,6 +74,7 @@
 <script>
 export default {
   name: "MatrixInput",
+  computed: { },
   data: function() {
     return {
       count: 0,
@@ -121,7 +121,6 @@ export default {
       if (matrix.length === 0) {
         matrix.push([{ x: 0, y: 0, value: 0 }]);
       } else {
-        console.log(matrix[matrix.length - 1]);
         let newRow = [];
         for (let index = 0; index < matrix[matrix.length - 1].length; index++) {
           newRow.push({
@@ -148,7 +147,7 @@ export default {
     },
 
     /**
-     * validate and send calculation request
+     * Send calculation request
      */
     calculate() {
       this.error = [];
@@ -156,7 +155,7 @@ export default {
       this.$axios
         .post("/api/calculate", payload)
         .then(res => {
-          this.result = res.data.result
+          this.result = res.data.result;
           console.log(res.data.result);
         })
         .catch(err => {
@@ -173,7 +172,7 @@ export default {
     /**
      * Reset result matrix
      */
-    back(){
+    back() {
       this.result = null;
     }
   }
@@ -196,7 +195,8 @@ export default {
   padding: 5px;
   max-width: 100px;
 }
-.matrix-cell input , .matrix-cell label {
+.matrix-cell input,
+.matrix-cell label {
   max-width: 100px;
   border: 1px solid #42b983;
   padding: 5px 15px;
