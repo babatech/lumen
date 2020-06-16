@@ -1,18 +1,17 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <h1>Matrix multiplication with lumen</h1>
-    <MatrixInput  />
+    <MatrixContainer  />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import MatrixInput from '@/components/MatrixInput.vue'
+import MatrixContainer from '@/components/MatrixContainer.vue'
 
 export default {
   name: 'home',
   components: {
-    MatrixInput
+    MatrixContainer
   }
 }
 </script>

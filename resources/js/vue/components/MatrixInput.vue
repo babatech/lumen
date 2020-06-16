@@ -2,7 +2,9 @@
   <div class="matrix-input">
 
     <div class="row" v-show="!result">
-    <h3>Enter Matrix data</h3>
+      <div class="col-md-12">
+        <h3>Enter Matrix data</h3>
+      </div>
       <div class="col-md-12" v-show="error.length>0">
         <div class="alert alert-danger">
           <p v-for="msg in error" v-bind:key="msg">{{msg}}</p>
