@@ -12,13 +12,7 @@
       <div class="col-md-6">
         <h3>Matrix A</h3>
         <table class="table">
-          <tbody>
-            <tr v-for="(row, index) in matrixA" class="matrix-row" v-bind:key="index">
-              <td v-for="(cell, columnNumber) in row" class="matrix-cell" v-bind:key="columnNumber">
-                <input type="number" v-model.number="cell.value" />
-              </td>
-            </tr>
-          </tbody>
+          <MatrixForm v-bind:matrix="this.matrixA" />
           <tfoot>
             <tr class="matrix-row">
               <td class="matrix-cell add" @click="addRow(matrixA)">Add row</td>
@@ -30,13 +24,7 @@
       <div class="col-md-6">
         <h3>Matrix B</h3>
         <table class="table">
-          <tbody>
-            <tr v-for="(row, index) in matrixB" class="matrix-row" v-bind:key="index">
-              <td v-for="(cell, columnNumber) in row" class="matrix-cell" v-bind:key="columnNumber">
-                <input type="number" v-model.number="cell.value" />
-              </td>
-            </tr>
-          </tbody>
+          <MatrixForm v-bind:matrix="this.matrixB"  />
           <tfoot>
             <tr class="matrix-row">
               <td class="matrix-cell add" @click="addRow(matrixB)">Add row</td>
@@ -54,13 +42,7 @@
       <div class="col-md-12">
         <h3>Result Matrix</h3>
         <table class="table">
-          <tbody>
-            <tr v-for="(row, index) in result" class="matrix-row" v-bind:key="index">
-              <td v-for="(cell, columnNumber) in row" class="matrix-cell" v-bind:key="columnNumber">
-                <label>{{cell.x}}:{{cell.y}} => {{cell.value}}</label>
-              </td>
-            </tr>
-          </tbody>
+          <MatrixForm v-bind:matrix="this.result" v-bind:result="true"/>
         </table>
       </div>
 
@@ -72,15 +54,19 @@
 </template>
 
 <script>
+import MatrixForm from "./MatrixForm"
 export default {
   name: "MatrixInput",
   computed: { },
+  components:{
+    MatrixForm
+  },
   data: function() {
     return {
       count: 0,
       matrixA: [],
       matrixB: [],
-      result: null,
+      result: [[{ x: 0, y: 0, value: 0 }]],
       error: []
     };
   },
