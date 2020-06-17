@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test": "mochapack — webpack-config=node_modules/laravel-mix/setup/webpack.config.js — require resources/js/vue/tests/setup.js resources/js/vue/tests/\\*\\*/\\*.spec.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -21,9 +22,15 @@
     "@vue/cli-plugin-eslint": "~4.2.3",
     "@vue/cli-plugin-router": "^4.2.3",
     "@vue/cli-service": "~4.2.3",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
+    "expect": "^26.0.1",
+    "jsdom": "^16.2.2",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^8.0.1",
+    "mochapack": "^2.0.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
