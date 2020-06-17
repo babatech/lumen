@@ -7,8 +7,6 @@ yarn-debug.log*
 yarn-error.log*
 Homestead.json
 Homestead.yaml
-composer.lock
-package-lock.json
 
 # IDEs
 .DS_Store
