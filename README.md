@@ -1,4 +1,6 @@
 # lumen
+Lumen API for matrix multiplcation.
+View Deployed project on heroku [here](https://lumenvueapp.herokuapp.com/).
 
 ### Important directory changes
 
@@ -21,12 +23,12 @@ php -S localhost:8021 -t public (PHP development server)
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### PHPunit test
+```
+./vendor/bin/phpunit
 ```
