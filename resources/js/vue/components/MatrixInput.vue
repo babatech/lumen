@@ -66,7 +66,7 @@ export default {
       count: 0,
       matrixA: [],
       matrixB: [],
-      result: [[{ x: 0, y: 0, value: 0 }]],
+      result: [[]],
       error: []
     };
   },
