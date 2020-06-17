@@ -13,7 +13,7 @@ Vue.prototype.$axios = axios
 Vue.use(Vuex)
 
 new Vue({
-  router,
-  render: h => h(App),
-  store
+    router,
+    render: h => h(App),
+    store
 }).$mount('#app')
