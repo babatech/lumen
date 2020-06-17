@@ -13,4 +13,6 @@
 
 $router->group(['prefix' => 'api'], function ($router) {
     $router->post('/calculate', ['uses' => 'APIController@calculate']);
+
+    $router->post('/download', ['uses' => 'APIController@downloadCSVFile']);
 });

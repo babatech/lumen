@@ -4,7 +4,8 @@
     "require": {
         "php": "^7.3",
         "laravel/lumen-framework": "^7.0",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "usmanhalalit/laracsv": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

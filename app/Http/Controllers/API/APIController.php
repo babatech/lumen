@@ -11,6 +11,13 @@ use App\Matrix;
 
 class APIController extends BaseController
 {
+    /**
+     * Perform Matrix Multiplcation
+     *
+     * Calculate the result martirix with given two Matrix's
+     * @param Request $request API Payload
+     * @return JSON API response
+     */
     public function calculate(Request $request)
     {
         
@@ -27,5 +34,17 @@ class APIController extends BaseController
             "status" => 200,
             "result" => Matrix::multiplication($request->all())
         ], 200);
+    }
+
+    /**
+     * Download CSV file
+     *
+     * Download the Given Matrix as CSV file
+     * @param Request $request API Payload
+     * @return JSON API response
+     */
+    public function downloadCSVFile(Request $request)
+    {
+
     }
 }
