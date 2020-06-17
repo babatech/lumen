@@ -66,7 +66,7 @@ export default {
       count: 0,
       matrixA: [],
       matrixB: [],
-      result: [[]],
+      result: null,
       error: []
     };
   },
