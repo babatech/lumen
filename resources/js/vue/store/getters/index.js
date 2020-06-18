@@ -1,11 +1,11 @@
 export const getters = {
-    matrixA: state =>{
+    matrixA: state => {
         return state.matrixA;
     },
-    matrixB: state=>{
+    matrixB: state => {
         return state.matrixA;
     },
-    result: state=>{
+    result: state => {
         return state.result;
     }
 }
