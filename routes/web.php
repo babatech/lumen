@@ -15,6 +15,6 @@
  * Always the last route! Loads Vue Application.
  */
 
-$router->get('/', function () {
+$router->get('/{route:.*}/', function () {
     return view('app');
 });

@@ -119,4 +119,36 @@ class Matrix
             return $letter;
         }
     }
+
+    public static function validateMatrix($param)
+    {
+        $validator = Validator::make($param, [
+            'result' => 'required|array|min:1',
+            'result.*' => 'required|array|min:1',
+        ], [
+            'result.required' => 'Result Matrix is required',
+            'result.array' => 'Result Matrix should be an array',
+            'result.min' => 'Result Matrix is invalid',
+            'result.*.required' => 'Result Matrix should have a nested element',
+            'result.*.array' => 'Result Matrix nested element should be an array',
+            'result.*.min' => 'Result Matrix is empty'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors()->all();
+        }
+
+        return false;
+    }
+
+    public static function getCSV($param)
+    {
+        $file = fopen('./../storage/app/result.csv', 'w');
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        
+        return storage_path('result.csv');
+    }
 }

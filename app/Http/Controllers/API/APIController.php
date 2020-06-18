@@ -45,6 +45,22 @@ class APIController extends BaseController
      */
     public function downloadCSVFile(Request $request)
     {
+        $validator = Matrix::validateMatrix($request->all());
+    
+        if ($validator) {
+            return response()->json([
+                "status" => 400,
+                "error" => $validator
+            ], 400);
+        }
+        
+        $path = Matrix::getCSV($request->all());
 
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content' =>  'Disposition:attachment;filename=result.csv'
+        );
+        
+        return response()->download($path, 'result.csv', $headers);
     }
 }

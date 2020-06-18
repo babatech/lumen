@@ -160,7 +160,21 @@ export default {
      */
     back() {
       this.result = null;
-    }
+    },
+
+    /**
+     * Download result file as CSV
+     */
+    download() {
+      this.error = [];
+      this.$axios
+        .post("/api/download", { result: this.result})
+        .then(() => {
+        })
+        .catch(err => {
+          this.error = err.response.data.error;
+        });
+    },
   }
 };
 </script>
