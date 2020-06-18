@@ -54,13 +54,7 @@ class APIController extends BaseController
             ], 400);
         }
         
-        $path = Matrix::getCSV($request->all());
-
-        $headers = array(
-            'Content-Type' => 'text/csv',
-            'Content' =>  'Disposition:attachment;filename=result.csv'
-        );
-        
-        return response()->download($path, 'result.csv', $headers);
+        Matrix::prepareCSV($request->all());
+        return Storage::download('app/result.csv');
     }
 }

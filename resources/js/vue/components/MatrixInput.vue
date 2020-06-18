@@ -75,16 +75,32 @@ export default {
     };
   },
   methods: {
-    setSample(matrix){
-      if(matrix === "A"){
-        this.matrixA.push([{x: 0, y:0, value: 8},{x: 1, y:0, value: 6},{x: 2, y:0, value: 2}])
-        this.matrixA.push([{x: 0, y:1, value: 3},{x: 1, y:1, value: 1},{x: 2, y:1, value: 4}])
-      }else if(matrix === "B"){
-        this.matrixB.push([{x: 0, y:0, value: 4},{x: 1, y:0, value: 6}])
-        this.matrixB.push([{x: 0, y:1, value: 5},{x: 1, y:1, value: 9}])
-        this.matrixB.push([{x: 0, y:1, value: 7},{x: 1, y:1, value: 6}])
+    setSample(matrix) {
+      if (matrix === "A") {
+        this.matrixA.push([
+          { x: 0, y: 0, value: 8 },
+          { x: 1, y: 0, value: 6 },
+          { x: 2, y: 0, value: 2 }
+        ]);
+        this.matrixA.push([
+          { x: 0, y: 1, value: 3 },
+          { x: 1, y: 1, value: 1 },
+          { x: 2, y: 1, value: 4 }
+        ]);
+      } else if (matrix === "B") {
+        this.matrixB.push([
+          { x: 0, y: 0, value: 4 },
+          { x: 1, y: 0, value: 6 }
+        ]);
+        this.matrixB.push([
+          { x: 0, y: 1, value: 5 },
+          { x: 1, y: 1, value: 9 }
+        ]);
+        this.matrixB.push([
+          { x: 0, y: 1, value: 7 },
+          { x: 1, y: 1, value: 6 }
+        ]);
       }
-
     },
     add() {
       if (this.count === 0) {
@@ -156,8 +172,7 @@ export default {
       this.$axios
         .post("/api/calculate", payload)
         .then(res => {
-          this.result = res.data.result;
-          console.log(res.data.result);
+          this.$store.dispatch("setResult", res.data.result);
         })
         .catch(err => {
           if (err.response.data.error) this.error = err.response.data.error;
@@ -168,7 +183,7 @@ export default {
      * Reset both Matrix's
      */
     reset() {
-      this.$store.dispatch ("resetMatrix");
+      this.$store.dispatch("resetMatrix");
     },
     /**
      * Reset result matrix
@@ -180,16 +195,21 @@ export default {
     /**
      * Download result file as CSV
      */
-    download() {
+    /* download() {
       this.error = [];
       this.$axios
-        .post("/api/download", { result: this.result})
-        .then(() => {
-        })
+        .get("/api/download", { result: this.result })
+        .then( res => {
+          let blob = new Blob([res.data], { type: "application/csv" });
+          let link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = "result.csv";
+          link.click();
+        } )
         .catch(err => {
           this.error = err.response.data.error;
         });
-    },
+    } */
   }
 };
 </script>
@@ -215,5 +235,8 @@ export default {
   max-width: 100px;
   border: 1px solid #42b983;
   padding: 5px 15px;
+}
+.btn{
+  margin: 0 10px;
 }
 </style>

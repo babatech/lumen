@@ -141,14 +141,18 @@ class Matrix
         return false;
     }
 
-    public static function getCSV($param)
+    public static function prepareCSV($param)
     {
         $file = fopen('./../storage/app/result.csv', 'w');
 
         $headers = array(
-            'Content-Type' => 'text/csv',
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=result.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
         );
         
-        return storage_path('result.csv');
+        return storage_path('app/result.csv');
     }
 }

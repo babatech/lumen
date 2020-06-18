@@ -4,5 +4,8 @@ export const getters = {
     },
     matrixB: state=>{
         return state.matrixA;
+    },
+    result: state=>{
+        return state.result;
     }
 }
