@@ -17,6 +17,7 @@
             <tr class="matrix-row">
               <td class="matrix-cell add" @click="addRow(matrixA)">Add row</td>
               <td class="matrix-cell add" @click="addColumn(matrixA)">Add column</td>
+              <td class="matrix-cell add" @click="setSample('A')">Sample data</td>
             </tr>
           </tfoot>
         </table>
@@ -24,11 +25,12 @@
       <div class="col-md-6">
         <h3>Matrix B</h3>
         <table class="table">
-          <MatrixForm v-bind:matrix="this.matrixB"  />
+          <MatrixForm v-bind:matrix="this.matrixB" />
           <tfoot>
             <tr class="matrix-row">
               <td class="matrix-cell add" @click="addRow(matrixB)">Add row</td>
               <td class="matrix-cell add" @click="addColumn(matrixB)">Add column</td>
+              <td class="matrix-cell add" @click="setSample('B')">Sample data</td>
             </tr>
           </tfoot>
         </table>
@@ -42,7 +44,7 @@
       <div class="col-md-12">
         <h3>Result Matrix</h3>
         <table class="table">
-          <MatrixForm v-bind:matrix="this.result" v-bind:result="true"/>
+          <MatrixForm v-bind:matrix="this.result" v-bind:result="true" />
         </table>
       </div>
 
@@ -54,23 +56,36 @@
 </template>
 
 <script>
-import MatrixForm from "./MatrixForm"
+import MatrixForm from "./MatrixForm";
+import { mapState } from "vuex";
 export default {
   name: "MatrixInput",
-  computed: { },
-  components:{
+  computed: mapState({
+    matrixA: state => state.matrixA,
+    matrixB: state => state.matrixB,
+    result: state => state.result
+  }),
+  components: {
     MatrixForm
   },
   data: function() {
     return {
       count: 0,
-      matrixA: [],
-      matrixB: [],
-      result: null,
       error: []
     };
   },
   methods: {
+    setSample(matrix){
+      if(matrix === "A"){
+        this.matrixA.push([{x: 0, y:0, value: 8},{x: 1, y:0, value: 6},{x: 2, y:0, value: 2}])
+        this.matrixA.push([{x: 0, y:1, value: 3},{x: 1, y:1, value: 1},{x: 2, y:1, value: 4}])
+      }else if(matrix === "B"){
+        this.matrixB.push([{x: 0, y:0, value: 4},{x: 1, y:0, value: 6}])
+        this.matrixB.push([{x: 0, y:1, value: 5},{x: 1, y:1, value: 9}])
+        this.matrixB.push([{x: 0, y:1, value: 7},{x: 1, y:1, value: 6}])
+      }
+
+    },
     add() {
       if (this.count === 0) {
         this.matrixA[this.count].push({ x: 0, y: 0, value: 0 });
@@ -145,15 +160,15 @@ export default {
           console.log(res.data.result);
         })
         .catch(err => {
-          this.error = err.response.data.error;
+          if (err.response.data.error) this.error = err.response.data.error;
+          else this.error = [err.response.statusText];
         });
     },
     /**
      * Reset both Matrix's
      */
     reset() {
-      this.matrixA = [];
-      this.matrixB = [];
+      this.$store.dispatch ("resetMatrix");
     },
     /**
      * Reset result matrix
@@ -193,7 +208,7 @@ export default {
   text-align: center;
   border: 2px dotted #42b983;
   padding: 5px;
-  max-width: 100px;
+  min-width: 120px;
 }
 .matrix-cell input,
 .matrix-cell label {
