@@ -24,7 +24,7 @@
       <div class="col-md-6">
         <h3>Matrix B</h3>
         <table class="table">
-          <MatrixForm v-bind:matrix="this.matrixB"  />
+          <MatrixForm v-bind:matrix="this.matrixB" />
           <tfoot>
             <tr class="matrix-row">
               <td class="matrix-cell add" @click="addRow(matrixB)">Add row</td>
@@ -42,7 +42,7 @@
       <div class="col-md-12">
         <h3>Result Matrix</h3>
         <table class="table">
-          <MatrixForm v-bind:matrix="this.result" v-bind:result="true"/>
+          <MatrixForm v-bind:matrix="this.result" v-bind:result="true" />
         </table>
       </div>
 
@@ -54,19 +54,21 @@
 </template>
 
 <script>
-import MatrixForm from "./MatrixForm"
+import MatrixForm from "./MatrixForm";
+import { mapState } from "vuex";
 export default {
   name: "MatrixInput",
-  computed: { },
-  components:{
+  computed: mapState({
+    matrixA: state => state.matrixA,
+    matrixB: state => state.matrixB,
+    result: state => state.result
+  }),
+  components: {
     MatrixForm
   },
   data: function() {
     return {
       count: 0,
-      matrixA: [],
-      matrixB: [],
-      result: null,
       error: []
     };
   },
@@ -145,7 +147,8 @@ export default {
           console.log(res.data.result);
         })
         .catch(err => {
-          this.error = err.response.data.error;
+          if (err.response.data.error) this.error = err.response.data.error;
+          else this.error = [err.response.statusText];
         });
     },
     /**
