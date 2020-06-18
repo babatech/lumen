@@ -32,3 +32,8 @@ npm run lint
 ```
 ./vendor/bin/phpunit
 ```
+
+### PSR12 validation
+```
+./vendor/bin/phpcs
+```
