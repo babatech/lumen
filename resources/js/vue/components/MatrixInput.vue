@@ -189,7 +189,7 @@ export default {
      * Reset result matrix
      */
     back() {
-      this.result = null;
+          this.$store.dispatch("setResult", null);
     },
 
     /**
